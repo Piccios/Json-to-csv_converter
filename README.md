@@ -1,66 +1,68 @@
 # Fast JSONL to CSV Converter
 
-Uno script in Python leggero per convertire enormi file JSON (formattati come JSON Lines/NDJSON) in file CSV. Elabora i file riga per riga, risultando ottimizzato per minimizzare l'utilizzo della memoria RAM.
+Hey fellow developers! I built this lightweight Python script to solve a common headache: converting massive JSON files (specifically JSON Lines/NDJSON) into CSV formats without crashing our machines.
 
-## Caratteristiche
+I hope this saves you some valuable time!
 
-- **Ottimizzato per la Memoria**: Elabora i dati "streammando" riga per riga senza cercare di caricare l'intero file in memoria RAM. Ideale per file molto pesanti (es. dataset da svariati GB).
-- **Facilità d'Uso**: Semplice interfaccia a riga di comando (CLI).
-- **Resiliente agli Errori**: Identifica, cattura e ignora eventuali righe con JSON malformati per continuare l'elaborazione del resto del dataset.
-- **Zero Dipendenze**: Lo script è scritto in puro Python (>= 3.6). Usa solo moduli della core library (`json`, `csv`, `os`, `sys`, `argparse`).
-- **Supporto UTF-8**: Mantiene in modo corretto l'encoding per i caratteri di testo speciali.
+## ✨ Features
 
-## Installazione
+- **Memory Optimized**: Streams data line-by-line rather than loading the whole file into RAM. Perfect for those massive, multi-GB datasets you need to crunch.
+- **Dead Simple Usage**: Just a clean, straightforward Command Line Interface (CLI).
+- **Error Resilient**: Bad JSON formatting on line 42,069? No problem. The script catches malformed lines, logs them, and keeps processing the rest of your dataset.
+- **Zero Dependencies**: Written in pure Python (>= 3.6). It only relies on core library modules (`json`, `csv`, `os`, `sys`, `argparse`), so you don't need a messy `requirements.txt`.
+- **UTF-8 Support**: Properly handles special characters and text encoding right out of the box.
 
-Nessuna installazione richiesta se hai già Python sul tuo sistema! È sufficiente clonare questa repository o scaricare il file `convert.py`.
+## 🚀 Installation
+
+If you have Python on your machine, you're already good to go—no `pip install` required! Just clone the repo or grab the `convert.py` file.
 
 ```bash
 git clone https://github.com/Piccios/Json-to-csv_converter.git
 cd Json-to-csv_converter
 ```
 
-## Utilizzo
+## 💻 Usage
 
-Lo script richiede semplicemente 2 parametri passati a linea cdi comando: l'input JSON e l'output CSV desiderato.
+The script just needs two simple arguments: your input JSON file and where you want to save the output CSV.
 
 ```bash
 python convert.py <input.json> <output.csv>
 ```
 
-### Esempio
+### Example
 
 ```bash
 python convert.py IT-file_2026-02.json IT-file_2026-02.csv
 ```
 
-Un output simile verrà generato sulla console (se il salvataggio è per grandi quantitativi di dati):
+While it runs (especially on huge datasets), it'll give you progress updates so you know it hasn't frozen:
 
 ```text
 Inizio conversione di IT-file_2026-02.json in IT-file_2026-02.csv...
-Elaborate 1000 righe...
-Elaborate 2000 righe...
-Elaborate 3000 righe...
-Conversione completata con successo! Il file salvato è: IT-file_2026-02.csv
+Elaborated 1000 rows...
+Elaborated 2000 rows...
+Elaborated 3000 rows...
+Conversion completed successfully! The file saved is: IT-file_2026-02.csv
 ```
 
-Puoi richiamare sempre i messaggi di help dello script eseguendo:
+Forgot the commands? You can always pull up the help menu:
 
 ```bash
 python convert.py -h
 ```
 
-## Struttura del file JSON analizzato
+## 📄 Expected JSON Structure
 
-Lo script si aspetta file d'ingresso formattati secondo lo standard [JSON Lines (JSONL)](https://jsonlines.org/). Questo significa che ogni riga del tuo file deve corrispondere a un oggetto JSON indipendente e valido.
+This script expects input files formatted as [JSON Lines (JSONL)](https://jsonlines.org/). This simply means each line of your file must be its own independent, valid JSON object.
 
-**Esempio di input compatibile:**
+**Compatible Input Example:**
 ```json
-{"nome": "Mario", "cognome": "Rossi", "eta": 30}
-{"nome": "Luca", "cognome": "Verdi", "eta": 25}
-{"nome": "Giulia", "cognome": "Bianchi", "eta": 28}
+{"name": "Mario", "surname": "Rossi", "age": 30}
+{"name": "Luca", "surname": "Verdi", "age": 25}
+{"name": "Giulia", "surname": "Bianchi", "age": 28}
 ```
-*Attenzione: un file colmo di enormi Array JSON classici (es. `[{}, {}, {}]`) richiederà un parser diverso da quello offerto da questo convertitore riga per riga.*
+*Heads up: If your file is just one giant standard JSON Array (e.g., `[{}, {}, {}]`), this specific line-by-line parser won't work for it.*
 
-## Come Contribuire
+## 🤝 Contributing
 
-Sentiti libero di aprire issue e pull request se desideri aggiungere controlli per l'input o lanciare nuove migliorie!
+We made this tool to make developers' lives easier. If you want to add input validation, new features, or just make it better, feel free to open an issue or drop a pull request!
